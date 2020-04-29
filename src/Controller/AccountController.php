@@ -119,7 +119,7 @@ class AccountController extends AbstractController
      * @IsGranted("ROLE_USER")
      *
      * @return Response
-     */
+     **/
     public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager)
     {
         $passwordUpdate = new PasswordUpdate();
@@ -165,11 +165,23 @@ class AccountController extends AbstractController
      * @IsGranted("ROLE_USER")
      * 
      * @return Response
-     */
+     **/
     public function myAccount()
     {
         return $this->render('user/index.html.twig', [
             'user' => $this->getUser()
         ]);
+    }
+
+    /**
+     * Permet d'afficher la liste des réservations faites par l'utilisateur
+     * 
+     * @Route("/account/bookings", name="account_bookings")
+     *
+     * @return Response
+     */
+    public function bookings()
+    {
+        return $this->render('account/bookings.html.twig');
     }
 }
