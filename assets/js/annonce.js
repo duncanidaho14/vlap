@@ -4,7 +4,7 @@ $('#add-image').click(function() {
     // Je récupère le numéro des futurs champs que je vrais créer
     const index = +$('#widgets-counter').val();
 
-    //je récupère le protoype des entrées
+    //je récupère les entrées du prototype
     const tmpl = $('#annonce_images').data('prototype').replace(/__name__/g, index);
 
     //j'injecte ce code au sein de la div
@@ -14,6 +14,8 @@ $('#add-image').click(function() {
     // je gère le boutton supprimer
     handleDeleteButtons();
 });
+
+// Delete le button
 function handleDeleteButtons() {
     $("button[data-action='delete']").click(function() {
         const target = this.dataset.target;
@@ -21,6 +23,7 @@ function handleDeleteButtons() {
     })
 }
 
+// Met à jour le compteur
 function updateCounter() {
     const count = +$('#annonce_images div.form-group').length;
 

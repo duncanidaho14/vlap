@@ -13,17 +13,11 @@
                         <a class="nav-link" href="{{path('ads_index')}}">Annonce</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="{{path('about')}}">A propos</a>
                     </li>
                 </ul>
                 
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                
             
 
                 <ul class="navbar-nav ml-auto">
@@ -32,7 +26,7 @@
                             <a href="#" class="nav-link dropdown-toogle" data-toggle="dropdown" id="accountDropdownLink">
                                 <img src="{{app.user.picture}}" alt="avatar de {{app.user.fullName}}" class="avatar avatar-mini">{{app.user.fullName}}
                             </a>
-                            <div class="dropdown-menu dopdown-menu-right" aria-labelledby="accountDropdownLink">
+                            <div class="dropdown-menu dopdown-menu-left" aria-labelledby="accountDropdownLink">
                                 <a href="{{path('ads_create')}}" class="dropdown-item">Créer une annonce</a>
                                 <a href="{{path('account_index')}}" class="dropdown-item">Mon Compte</a>
                                 <a href="{{path('account_bookings')}}" class="dropdown-item">Mes Réservations</a>

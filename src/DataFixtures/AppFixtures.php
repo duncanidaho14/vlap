@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Booking;
 use App\Entity\Comment;
+use App\Entity\PostLike;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -44,7 +45,7 @@ class AppFixtures extends Fixture
         $genres = ['male', 'female'];
 
         // Nous gérons les utilisateurs
-        for ($i= 1; $i <=10 ; $i++) { 
+        for ($i= 1; $i <= 20 ; $i++) { 
             $user = new User();
 
             $genre = $faker->randomElement($genres);
@@ -95,6 +96,14 @@ class AppFixtures extends Fixture
                 $manager->persist($image);
             }
 
+            for ($j = 0; $j < mt_rand(0, 10); $j++) { 
+                $like = new PostLike();
+                $like->setPost($ad)
+                        ->setUser($faker->randomElement($users));
+                
+                $manager->persist($like);
+            }
+
             // Gestion des réservations
             for ($j= 1; $j <= mt_rand(0, 10) ; $j++) { 
                 $booking = new Booking();
@@ -104,7 +113,7 @@ class AppFixtures extends Fixture
                 // Gestion de la date de fin
                 $duration = mt_rand(3, 10);
 
-                // on clone la startDate pour la modifier
+                // clone la startDate pour la modifier
                 $endDate = (clone $startDate)->modify("+$duration days");
                 $amount = $ad->getPrice() * $duration;
 

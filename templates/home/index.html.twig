@@ -10,9 +10,9 @@
         <h1 class="display-3">Bienvenue sur VLAP</h1>
         <p class="lead">Nous mettons en relations les voyageurs et les proprétaires qui veulent profiter d'opportunités et gagner de l'argent en proposant leur bien à la location</p>
         <hr class="my-4">
-        <p>Vous êtes voyageurs ? Et vous voulez voir où vous pourrez loger pour votre procahin déplacement ?.</p>
+        <p>Vous êtes voyageurs ? Et vous voulez voir où vous pourrez loger pour votre prochain déplacement ?</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Voir annonces</a>
+            <a class="btn btn-primary btn-lg" href="{{path('ads_index')}}" role="button">Voir annonces</a>
         </p>
     </div>
 
@@ -46,4 +46,39 @@
     {% endfor %}
     </div>
 </div> 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function onClickBtnLike(event){
+            event.preventDefault();
+
+            const url = this.href;
+            const spanCount = this.querySelector('span.js-likes');
+
+            axios.get(url).then(function(response) {
+                spanCount.textContent = response.data.likes;
+
+                if(icone.classList.contains('fas')) {
+                    icone.classList.replace('fas', 'far');
+                } else {
+                    icone.classList.replace('far', 'fas');
+                }
+            }).catch(function(error) {
+                if(error.response.status == 403){
+                    window.alert("vous ne pouvez pas liké un article si vous n'êtes pas connecté !")
+                }else {
+                    window.alert("Une erreur s'est produite, réessayez plus tard !!!")
+                }
+            });
+        }
+
+        document.querySelectorAll('a.js-like').forEach(function(link) {
+            link.addEventListener('click', onClickBtnLike);
+        });
+
+
+    </script>
 {% endblock %}

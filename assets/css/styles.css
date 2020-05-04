@@ -1,4 +1,13 @@
-@import 'bootstrap.min.css';
+@import 'bootswatch.min.css';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+
+}
 
 div.container, div.container-fluid {
     margin-top: 20px;
@@ -38,8 +47,8 @@ div.carousel-caption {
 }
 
 .avatar-mini {
-    max-width: 24px;
-    max-height: 24px;
+    max-width: 40px;
+    max-height: 30px;
 }
 
 .avatar-micro {
@@ -61,4 +70,8 @@ span.rating i {
 
 .alert .btn {
     color: white;
+}
+
+div.dropdown-menu.dopdown-menu-left {
+    margin-right: 70px;
 }

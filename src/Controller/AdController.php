@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Entity\Image;
+use App\Entity\PostLike;
 use App\Form\AnnonceType;
 use App\Repository\AdRepository;
+use App\Repository\PostLikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -85,6 +88,7 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer l'ajout de multiples images avec collectiontype
             foreach ($ad->getImages() as $image) {
                 $image->setAd($ad);
                 $manager->persist($image);
@@ -148,6 +152,50 @@ class AdController extends AbstractController
         return $this->redirectToRoute("ads_index");
     }
    
+    /**
+     * Permet de liké ou disliker un article
+     *
+     * @Route("/ads/{slug}/like", name="post_like")
+     * @param Ad $ad
+     * @return Response
+     */
+    public function like(Ad $ad, EntityManagerInterface $manager, PostLikeRepository $likeRepo): Response
+    {
+        $user = $this->getUser();
 
+        if(!$user) return $this->json([
+            'code' => 403,
+            'message' => 'Pas autorisé à entrer'
+        ], 403);
+
+        if ($ad->isLikedByUser($user)) {
+            $like = $likeRepo->findOneBy([
+                'post' => $ad,
+                'user' => $user
+            ]);
+
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => "Le like a bien été supprimé",
+                'likes' => $likeRepo->count(['post' => $ad])
+            ], 200);
+        }
+
+        $like = new PostLike();
+        $like->setPost($ad)
+                ->setUser($user);
+        
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => "ça marche bien",
+            'likes' => $likeRepo->count(['post' => $ad])
+        ], 200);
+    }
    
 }
