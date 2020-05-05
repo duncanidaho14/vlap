@@ -29,6 +29,6 @@ class AdminAccountController extends AbstractController
      * @return void
      */
     public function logout() {
-        $nombre = 10;
+        
     }
 }
