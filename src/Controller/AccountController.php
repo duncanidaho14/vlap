@@ -18,13 +18,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
-    /**
-     * Permet de gérer le formulaire de connexion
-     * 
-     * @Route("/login", name="account_login")
-     * 
-     * @return Response
-     */
     public function login(AuthenticationUtils $utils)
     {
         $error = $utils->getLastAuthenticationError();
@@ -36,25 +29,13 @@ class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * Permet de se déconnecter
-     *
-     * @Route("/logout", name="account_logout")
-     * 
-     * @return void
-     */
+    
     public function logout()
     {
 
     }
 
-    /**
-     * Permet d'afficher le formulaire d'inscription
-     * 
-     * @Route("/register", name="account_register")
-     * 
-     * @return Response
-     */
+    
     public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
@@ -83,14 +64,6 @@ class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * Permet d'afficher et de traiter le formulaire de modification de profil
-     * 
-     * @Route("/account/profile", name="account_profile")
-     * @IsGranted("ROLE_USER")
-     * 
-     * @return Response
-     */
     public function profile(Request $request, EntityManagerInterface $manager)
     {
         $user = $this->getUser();

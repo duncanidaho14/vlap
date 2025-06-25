@@ -1,3 +1,125 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+admin_account_login:
+  path: /admin/login
+  controller: App\Controller\AdminAccountController::login
+
+admin_account_logout:
+  path: /admin/logout
+  controller: App\Controller\AdminAccountController::logout
+
+admin_ads_index:
+  path: /admin/ads/{page<\d+>?1}
+  controller: App\Controller\AdminAnController::index
+
+admin_ads_edit:
+  path: /admin/ads/{id}/edit
+  controller: App\Controller\AdminAnController::edit
+
+admin_ads_delete:
+  path: /admin/ads/{id}/delete
+  controller: App\Controller\AdminAnController::delete
+
+admin_dashboard:
+  path: /admin/dashboard
+  controller: App\Controller\AdminDashboardController::index
+
+admin_booking_index:
+  path: /admin/bookings/{page<\d+>?1}
+  controller: App\Controller\AdminBookingController::index
+
+admin_booking_edit:
+  path: /admin/bookings/{id}/edit
+  controller: App\Controller\AdminBookingController::edit
+
+admin_booking_delete:
+  path: /admin/bookings/{id}/delete
+  controller: App\Controller\AdminBookingController::delete
+
+admin_comment_index:
+  path: /admin/comments/{page<\d+>?1}
+  controller: App\Controller\AdminCommentController::index
+
+admin_comment_edit:
+  path: /admin/comments/{id}/edit
+  controller: App\Controller\AdminCommentController::edit
+
+admin_comment_delete:
+  path: /admin/comments/{id}/delete
+  controller: App\Controller\AdminCommentController::delete
+
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+about:
+  path: /about
+  controller: App\Controller\AboutController::index
+
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::index
+
+account_login:
+  path: /login
+  controller: App\Controller\AccountController::login
+
+account_logout:
+  path: /logout
+  controller: App\Controller\AccountController::logout
+
+account_register:
+  path: /account/register
+  controller: App\Controller\AccountController::register
+
+account_index:
+  path: /account
+  controller: App\Controller\AccountController::index
+
+account_bookings:
+  path: /account/bookings
+  controller: App\Controller\AccountController::bookings
+
+account_profile:
+  path: /account/profile
+  controller: App\Controller\AccountController::profile
+
+update_password:
+  path: /account/update-password
+  controller: App\Controller\AccountController::updatePassword
+
+
+ads_index:
+  path: /ads
+  controller: App\Controller\AdController::index
+
+ads_create:
+  path: /ads/new
+  controller: App\Controller\AdController::create
+
+ads_edit:
+  path: /ads/{slug}/edit
+  controller: App\Controller\AdController::edit
+
+ads_show:
+  path: /ads/{slug}
+  controller: App\Controller\AdController::show
+
+ads_delete:
+  path: /ads/{slug}/delete
+  controller: App\Controller\AdController::delete
+
+user_show:
+  path: /user/{slug}
+  controller: App\Controller\UserController::index
+
+booking_create:
+  path: /ads/{slug}/book
+  controller: App\Controller\BookingController::index
+
+booking_show:
+  path: /bookings/{id}
+  controller: App\Controller\BookingController::show
+
+post_like:
+  path: /ads/{slug}/like
+  controller: App\Controller\AdController::like
+

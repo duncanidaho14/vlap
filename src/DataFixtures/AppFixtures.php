@@ -11,11 +11,12 @@ use App\Entity\Booking;
 use App\Entity\Comment;
 use App\Entity\PostLike;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -29,13 +30,14 @@ class AppFixtures extends Fixture
         $adminRole = new Role();
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
+        $appartementImage = 'https://placeholderimage.eu/api/1000/300/';
 
         $adminUser = new User();
         $adminUser->setFirstName('kirua')
                     ->setLastName('zoldik')
                     ->setEmail('kirua@gmail.com')
                     ->setHash($this->encoder->encodePassword($adminUser, 'password'))
-                    ->setPicture('http://placehold.it/1000x300')
+                    ->setPicture('https://placehold.co/1000x300/png')
                     ->setIntroduction($faker->sentence())
                     ->setDescription('<p>'.join('</p><p>', $faker->paragraphs(3)) .'</p>')
                     ->addUserRole($adminRole);
@@ -72,7 +74,7 @@ class AppFixtures extends Fixture
         for ($i=0; $i <=30; $i++) { 
             $ad = new Ad();
             $title = $faker->sentence();
-            $coverImage = $faker->imageUrl(1000, 350);
+            $coverImage = $appartementImage;
             $introduction = $faker->paragraph(2);
             $content = '<p>'.join('</p><p>', $faker->paragraphs(5)) . '</p>';
 
